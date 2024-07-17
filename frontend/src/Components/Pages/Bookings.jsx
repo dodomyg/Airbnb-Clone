@@ -31,7 +31,7 @@ const navigate=useNavigate()
 
     fetchBooking()
 
-  },[])
+  },[setBooking,user])
 
 
   return (

@@ -13,6 +13,7 @@ import {
   } from '@chakra-ui/react'
 import { IoSearch } from "react-icons/io5";
 import { Divider,IconButton } from '@chakra-ui/react'
+import { useToast } from '@chakra-ui/react'
 import { Box,Button } from '@chakra-ui/react'
 import Logo from '../Extra/Logo'
 import UserContext from '../Context/UserContext';
@@ -22,7 +23,7 @@ axios.defaults.withCredentials=true
 const Navbar = () => {
 
 
-
+const toast = useToast()
 
   const navigate=useNavigate()
 
@@ -34,8 +35,17 @@ const handleLogOut=async()=>{
   }
   try {
     await axios.post('http://localhost:5000/airbnb/users/logout',{withCredentials:true})
+    
+    toast({
+      title: 'Logged out successfully.',
+      description: "We've logged you out.",
+      status: 'success',
+      duration: 3000,
+      isClosable: true,
+    })
     navigate('/auth')
     window.location.reload()
+
   } catch (error) {
     console.log(error);
   }
